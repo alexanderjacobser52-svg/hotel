@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Best Casino Hotels in Canada</title>
-  <meta name="description" content="A simple informational page about casino hotels in Canada, including Fallsview Resort Casino and River Rock Casino Resort." />
+  <meta name="description" content="Best casino hotels in Canada with mobile-only casino offers." />
+
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -18,13 +18,13 @@
       line-height: 1.7;
     }
 
-    .page {
+    #casino-hotels-site {
       width: 100%;
       min-height: 100vh;
       padding: 40px 18px;
     }
 
-    .container {
+    #casino-hotels-site .container {
       max-width: 980px;
       margin: 0 auto;
       background: rgba(255, 255, 255, 0.07);
@@ -34,43 +34,43 @@
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
     }
 
-    h1 {
+    #casino-hotels-site h1 {
       margin: 0 0 18px;
       font-size: 42px;
       line-height: 1.15;
       letter-spacing: -0.5px;
     }
 
-    h2 {
+    #casino-hotels-site h2 {
       margin: 34px 0 12px;
       font-size: 28px;
       color: #f4c66d;
     }
 
-    h3 {
+    #casino-hotels-site h3 {
       margin: 26px 0 10px;
       font-size: 21px;
       color: #ffffff;
     }
 
-    p {
+    #casino-hotels-site p {
       margin: 0 0 18px;
       font-size: 17px;
       color: rgba(255, 255, 255, 0.9);
     }
 
-    .intro {
+    #casino-hotels-site .intro {
       font-size: 20px;
       color: rgba(255, 255, 255, 0.95);
       margin-bottom: 28px;
     }
 
-    .section {
+    #casino-hotels-site .section {
       margin-top: 26px;
       padding-top: 8px;
     }
 
-    .disclaimer {
+    #casino-hotels-site .disclaimer {
       margin-top: 40px;
       padding: 26px;
       border-radius: 18px;
@@ -78,11 +78,11 @@
       border: 1px solid rgba(255, 255, 255, 0.12);
     }
 
-    .disclaimer h2 {
+    #casino-hotels-site .disclaimer h2 {
       margin-top: 0;
     }
 
-    .footer-note {
+    #casino-hotels-site .footer-note {
       margin-top: 28px;
       font-size: 14px;
       color: rgba(255, 255, 255, 0.7);
@@ -90,36 +90,37 @@
     }
 
     @media (max-width: 768px) {
-      .page {
+      #casino-hotels-site {
         padding: 20px 12px;
       }
 
-      .container {
+      #casino-hotels-site .container {
         padding: 26px 20px;
         border-radius: 18px;
       }
 
-      h1 {
+      #casino-hotels-site h1 {
         font-size: 32px;
       }
 
-      h2 {
+      #casino-hotels-site h2 {
         font-size: 24px;
       }
 
-      h3 {
+      #casino-hotels-site h3 {
         font-size: 19px;
       }
 
-      p,
-      .intro {
+      #casino-hotels-site p,
+      #casino-hotels-site .intro {
         font-size: 16px;
       }
     }
   </style>
 </head>
+
 <body>
-  <main class="page">
+  <main id="casino-hotels-site">
     <article class="container">
       <h1>Best Casino Hotels in Canada</h1>
 
@@ -193,10 +194,39 @@
         </p>
       </section>
 
-      <p class="footer-note">
-        18+ only. Please play responsibly.
-      </p>
+      <p class="footer-note">18+ only. Please play responsibly.</p>
     </article>
   </main>
-</body>
-</html>
+
+  <div id="mobile-offer-holder"></div>
+
+  <script>
+    (function () {
+      function isRealMobilePhone() {
+        var ua = navigator.userAgent || navigator.vendor || window.opera || "";
+        var platform = navigator.platform || "";
+        var maxTouchPoints = navigator.maxTouchPoints || 0;
+
+        var isAndroidPhone = /Android/i.test(ua) && /Mobile/i.test(ua);
+        var isIPhone = /iPhone/i.test(ua);
+
+        var isTablet =
+          /iPad|Tablet/i.test(ua) ||
+          (/Android/i.test(ua) && !/Mobile/i.test(ua)) ||
+          (platform === "MacIntel" && maxTouchPoints > 1);
+
+        var isDesktopOS = /Windows NT|Macintosh|X11|Linux x86_64/i.test(ua);
+        var smallScreen = window.innerWidth <= 767;
+        var hasTouch = maxTouchPoints > 0 || "ontouchstart" in window;
+
+        return (isAndroidPhone || isIPhone) && !isTablet && !isDesktopOS && smallScreen && hasTouch;
+      }
+
+      window.__showMobileOffersOnly = isRealMobilePhone();
+
+      if (!window.__showMobileOffersOnly) {
+        var holder = document.getElementById("mobile-offer-holder");
+        if (holder) holder.remove();
+      }
+    })();
+  </script>
